@@ -7,7 +7,7 @@ export const Route = createFileRoute('/_main/settings/')({
 
 function RouteComponent() {
   return (
-    <div className="w-full flex flex-col">
+    <div className="w-full py-4 px-4 lg:px-0 lg flex flex-col">
       <SettingsProfile />
     </div>
   )
