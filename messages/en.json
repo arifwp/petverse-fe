@@ -1,0 +1,12 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "home": "Home",
+  "adopt": "Adopt",
+  "discussions": "Discussions",
+  "current_locale": "Current locale: {locale}",
+  "language": "Language",
+  "theme": "Theme",
+  "account_profile": "Account Profile",
+  "settings": "Settings",
+  "logout": "Logout"
+}
