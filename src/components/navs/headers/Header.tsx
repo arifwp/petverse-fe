@@ -1,8 +1,6 @@
 import { LOGO_URL } from '#/constants/url.ts'
 import { m } from '#/paraglide/messages.js'
 import { Link } from '@tanstack/react-router'
-import ParaglideLocaleSwitcher from '../LocaleSwitcher.tsx'
-import ThemeToggle from '../ThemeToggle.tsx'
 import { HeaderMobile } from './HeaderMobile.tsx'
 import { HeaderProfileMenu } from './HeaderProfileMenu.tsx'
 
@@ -59,10 +57,6 @@ export default function Header() {
                 {item.label}
               </Link>
             ))}
-
-            <ParaglideLocaleSwitcher />
-
-            <ThemeToggle />
 
             <HeaderProfileMenu />
           </div>

@@ -3,12 +3,15 @@ import {
   HeadContent,
   Scripts,
   createRootRouteWithContext,
+  useRouteContext,
 } from '@tanstack/react-router'
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 
 import TanStackQueryDevtools from '../integrations/tanstack-query/devtools'
 
 import { getLocale } from '#/paraglide/runtime'
+import { DEFAULT_THEME_MODE, THEME_INIT_SCRIPT } from '#/utils/theme/theme'
+import { getThemeCookie } from '#/utils/theme/theme.functions'
 
 import type { QueryClient } from '@tanstack/react-query'
 import { Toaster } from 'react-hot-toast'
@@ -25,6 +28,9 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
     if (typeof document !== 'undefined') {
       document.documentElement.setAttribute('lang', getLocale())
     }
+
+    const themeMode = await getThemeCookie()
+    return { themeMode }
   },
 
   head: () => ({
@@ -51,10 +57,24 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 })
 
 function RootDocument({ children }: { children: React.ReactNode }) {
+  const { themeMode } = useRouteContext({ from: '__root__' })
+  const resolved =
+    themeMode === 'light' || themeMode === 'dark' ? themeMode : undefined
+
   return (
-    <html lang={getLocale()} suppressHydrationWarning>
+    <html
+      lang={getLocale()}
+      className={resolved}
+      data-theme={resolved ?? DEFAULT_THEME_MODE}
+      style={resolved ? { colorScheme: resolved } : undefined}
+      suppressHydrationWarning
+    >
       <head>
         <HeadContent />
+        <script
+          // Runs before paint to resolve `system` mode and avoid FOUC.
+          dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }}
+        />
       </head>
 
       <body>

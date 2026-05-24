@@ -44,7 +44,8 @@
   --primary: oklch(0.51 0.1 166);
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
+  /* --secondary-foreground: oklch(0.205 0 0); */
+  --secondary-foreground: oklch(0.56 0 0);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
   --accent: oklch(0.97 0 0);
@@ -101,7 +102,8 @@
   --primary: oklch(0.51 0.1 166);
   --primary-foreground: oklch(0.205 0 0);
   --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
+  /* --secondary-foreground: oklch(0.985 0 0); */
+  --secondary-foreground: oklch(0.72 0 0);
   --muted: oklch(0.269 0 0);
   --muted-foreground: oklch(0.708 0 0);
   --accent: oklch(0.269 0 0);
@@ -168,6 +170,13 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+@layer base {
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
+  }
 }
 
 body {

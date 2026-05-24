@@ -11,6 +11,8 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as MainRouteRouteImport } from './routes/_main/route'
 import { Route as MainIndexRouteImport } from './routes/_main/index'
+import { Route as PublicTncRouteImport } from './routes/_public/tnc'
+import { Route as PublicPrivacyPolicyRouteImport } from './routes/_public/privacy-policy'
 import { Route as MainDiscussionsRouteImport } from './routes/_main/discussions'
 import { Route as MainAdoptRouteImport } from './routes/_main/adopt'
 import { Route as MainSettingsIndexRouteImport } from './routes/_main/settings/index'
@@ -23,6 +25,16 @@ const MainIndexRoute = MainIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => MainRouteRoute,
+} as any)
+const PublicTncRoute = PublicTncRouteImport.update({
+  id: '/_public/tnc',
+  path: '/tnc',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PublicPrivacyPolicyRoute = PublicPrivacyPolicyRouteImport.update({
+  id: '/_public/privacy-policy',
+  path: '/privacy-policy',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const MainDiscussionsRoute = MainDiscussionsRouteImport.update({
   id: '/discussions',
@@ -44,11 +56,15 @@ export interface FileRoutesByFullPath {
   '/': typeof MainIndexRoute
   '/adopt': typeof MainAdoptRoute
   '/discussions': typeof MainDiscussionsRoute
+  '/privacy-policy': typeof PublicPrivacyPolicyRoute
+  '/tnc': typeof PublicTncRoute
   '/settings/': typeof MainSettingsIndexRoute
 }
 export interface FileRoutesByTo {
   '/adopt': typeof MainAdoptRoute
   '/discussions': typeof MainDiscussionsRoute
+  '/privacy-policy': typeof PublicPrivacyPolicyRoute
+  '/tnc': typeof PublicTncRoute
   '/': typeof MainIndexRoute
   '/settings': typeof MainSettingsIndexRoute
 }
@@ -57,25 +73,37 @@ export interface FileRoutesById {
   '/_main': typeof MainRouteRouteWithChildren
   '/_main/adopt': typeof MainAdoptRoute
   '/_main/discussions': typeof MainDiscussionsRoute
+  '/_public/privacy-policy': typeof PublicPrivacyPolicyRoute
+  '/_public/tnc': typeof PublicTncRoute
   '/_main/': typeof MainIndexRoute
   '/_main/settings/': typeof MainSettingsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/adopt' | '/discussions' | '/settings/'
+  fullPaths:
+    | '/'
+    | '/adopt'
+    | '/discussions'
+    | '/privacy-policy'
+    | '/tnc'
+    | '/settings/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/adopt' | '/discussions' | '/' | '/settings'
+  to: '/adopt' | '/discussions' | '/privacy-policy' | '/tnc' | '/' | '/settings'
   id:
     | '__root__'
     | '/_main'
     | '/_main/adopt'
     | '/_main/discussions'
+    | '/_public/privacy-policy'
+    | '/_public/tnc'
     | '/_main/'
     | '/_main/settings/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   MainRouteRoute: typeof MainRouteRouteWithChildren
+  PublicPrivacyPolicyRoute: typeof PublicPrivacyPolicyRoute
+  PublicTncRoute: typeof PublicTncRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -93,6 +121,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof MainIndexRouteImport
       parentRoute: typeof MainRouteRoute
+    }
+    '/_public/tnc': {
+      id: '/_public/tnc'
+      path: '/tnc'
+      fullPath: '/tnc'
+      preLoaderRoute: typeof PublicTncRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_public/privacy-policy': {
+      id: '/_public/privacy-policy'
+      path: '/privacy-policy'
+      fullPath: '/privacy-policy'
+      preLoaderRoute: typeof PublicPrivacyPolicyRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/_main/discussions': {
       id: '/_main/discussions'
@@ -138,6 +180,8 @@ const MainRouteRouteWithChildren = MainRouteRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   MainRouteRoute: MainRouteRouteWithChildren,
+  PublicPrivacyPolicyRoute: PublicPrivacyPolicyRoute,
+  PublicTncRoute: PublicTncRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

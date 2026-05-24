@@ -11,7 +11,7 @@ import { Menu } from 'lucide-react'
 import { useState } from 'react'
 import { headerMenus } from './Header'
 import { HeaderProfileMenu } from './HeaderProfileMenu'
-import { Separator } from '../ui/separator'
+import { Separator } from '#/components/ui/separator'
 
 export const HeaderMobile = () => {
   const [open, setOpen] = useState<boolean>(false)
