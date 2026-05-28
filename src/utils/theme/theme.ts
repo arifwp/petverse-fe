@@ -10,6 +10,25 @@ export function parseThemeMode(value: string | undefined | null): ThemeMode {
     : DEFAULT_THEME_MODE
 }
 
+// Resolves `system` against the OS preference. Falls back to `light` on the
+// server where `matchMedia` is unavailable — the client effect corrects it.
+export function resolveAppliedTheme(mode: ThemeMode): AppliedTheme {
+  if (mode !== 'system') return mode
+  if (typeof window === 'undefined') return 'light'
+  return window.matchMedia('(prefers-color-scheme: dark)').matches
+    ? 'dark'
+    : 'light'
+}
+
+export function applyTheme(applied: AppliedTheme) {
+  if (typeof document === 'undefined') return
+  const root = document.documentElement
+  root.classList.remove('light', 'dark')
+  root.classList.add(applied)
+  root.setAttribute('data-theme', applied)
+  root.style.colorScheme = applied
+}
+
 // Runs synchronously in <head> before React hydrates so the correct
 // theme is applied during the very first paint — eliminates FOUC.
 // Reads the server-set cookie (also handles the `system` case the

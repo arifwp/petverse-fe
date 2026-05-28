@@ -10,6 +10,7 @@ import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import TanStackQueryDevtools from '../integrations/tanstack-query/devtools'
 
 import { getLocale } from '#/paraglide/runtime'
+import { ThemeProvider } from '#/utils/theme/ThemeProvider'
 import { DEFAULT_THEME_MODE, THEME_INIT_SCRIPT } from '#/utils/theme/theme'
 import { getThemeCookie } from '#/utils/theme/theme.functions'
 
@@ -80,7 +81,9 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       <body>
         <Toaster position="bottom-center" reverseOrder={false} />
 
-        <main>{children}</main>
+        <ThemeProvider initialThemeMode={themeMode}>
+          <main>{children}</main>
+        </ThemeProvider>
 
         <TanStackDevtools
           config={{

@@ -9,17 +9,14 @@ import {
 } from '#/components/ui/dropdown-menu'
 import { Switch } from '#/components/ui/switch'
 import { Tabs, TabsList, TabsTrigger } from '#/components/ui/tabs'
-import type { AppliedTheme, ThemeMode } from '#/utils/theme/theme'
-import { THEME_COOKIE } from '#/utils/theme/theme'
-import { setThemeCookie } from '#/utils/theme/theme.functions'
+import { useTheme } from '#/utils/theme/ThemeProvider'
+import type { ThemeMode } from '#/utils/theme/theme'
 import { cn } from '#/lib/utils'
 import { m } from '#/paraglide/messages'
 import type { Locale } from '#/paraglide/runtime'
 import { getLocale, locales, setLocale } from '#/paraglide/runtime'
-import { useRouteContext } from '@tanstack/react-router'
 import type { LucideIcon } from 'lucide-react'
 import { Bell, ChevronRight, Globe, Moon, Palette, Sun } from 'lucide-react'
-import { useEffect, useState } from 'react'
 
 // ISO 3166-1 alpha-2 country code per locale, used to build the
 // regional indicator emoji. Keep these as country codes (e.g. 'GB'),
@@ -74,60 +71,12 @@ const renderFlag = (locale?: Locale) => {
   )
 }
 
-function resolveAppliedTheme(mode: ThemeMode): AppliedTheme {
-  if (mode !== 'system') return mode
-  if (typeof window === 'undefined') return 'light'
-  return window.matchMedia('(prefers-color-scheme: dark)').matches
-    ? 'dark'
-    : 'light'
-}
-
-function applyTheme(applied: AppliedTheme) {
-  const root = document.documentElement
-  root.classList.remove('light', 'dark')
-  root.classList.add(applied)
-  root.setAttribute('data-theme', applied)
-  root.style.colorScheme = applied
-}
-
 export const SettingsPreferences = () => {
   const currentLocale = getLocale()
-  const { themeMode: initialThemeMode } = useRouteContext({ from: '__root__' })
-  const [themeMode, setThemeMode] = useState<ThemeMode>(initialThemeMode)
-
-  useEffect(() => {
-    applyTheme(resolveAppliedTheme(themeMode))
-
-    if (themeMode !== 'system') return
-    const media = window.matchMedia('(prefers-color-scheme: dark)')
-    const handler = () => applyTheme(resolveAppliedTheme('system'))
-    media.addEventListener('change', handler)
-    return () => media.removeEventListener('change', handler)
-  }, [themeMode])
-
-  // Dev-only Ctrl+D shortcut to cycle through theme modes.
-  useEffect(() => {
-    if (import.meta.env.VITE_NODE_ENV === 'production') return
-
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (!event.ctrlKey || (event.key !== 'd' && event.key !== 'D')) return
-      event.preventDefault()
-      const next: ThemeMode = themeMode === 'dark' ? 'light' : 'dark'
-      void persistTheme(next)
-    }
-
-    window.addEventListener('keydown', onKeyDown)
-    return () => window.removeEventListener('keydown', onKeyDown)
-  }, [themeMode])
-
-  const persistTheme = async (next: ThemeMode) => {
-    setThemeMode(next)
-    document.cookie = `${THEME_COOKIE}=${encodeURIComponent(next)}; path=/; max-age=${60 * 60 * 24 * 365}; SameSite=Lax`
-    await setThemeCookie({ data: next })
-  }
+  const { themeMode, setThemeMode } = useTheme()
 
   const handleThemeChange = (next: string) => {
-    void persistTheme(next as ThemeMode)
+    setThemeMode(next as ThemeMode)
   }
 
   return (

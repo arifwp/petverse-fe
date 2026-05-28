@@ -52,5 +52,19 @@
   "delete_account_desc": "Akun dan semua data kamu akan dihapus secara permanen.",
   "about": "Tentang",
   "delete_account_confirm_desc": "Kami akan menghapus profil, unggahan, komentar, dan daftar yang Anda simpan secara permanen. Informasi hewan peliharaan Anda juga akan dihapus",
-  "you_sure": "Kamu yakin?"
+  "you_sure": "Kamu yakin?",
+  "followed_community": "Komunitas yang diikuti",
+  "post_like": "Suka",
+  "post_comment": "Komentar",
+  "post_share": "Bagikan",
+  "post_bookmark": "Simpan",
+  "post_verified_account": "Akun terverifikasi",
+  "post_more_options": "Opsi lainnya",
+  "post_pet_count": "{count} hewan peliharaan",
+  "post_posted_in": "Diposting di",
+  "post_media_alt": "Foto {index} dari {count} dibagikan oleh {author}",
+  "role_veterinarian": "Dokter Hewan",
+  "role_verified_rescue": "Penyelamat Terverifikasi",
+  "role_official": "Resmi",
+  "feed_load_error": "Gagal memuat feed. Silakan coba lagi."
 }

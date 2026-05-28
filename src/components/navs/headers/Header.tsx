@@ -3,6 +3,7 @@ import { m } from '#/paraglide/messages.js'
 import { Link } from '@tanstack/react-router'
 import { HeaderMobile } from './HeaderMobile.tsx'
 import { HeaderProfileMenu } from './HeaderProfileMenu.tsx'
+import { Search } from 'lucide-react'
 
 export interface Menu {
   id: number
@@ -18,11 +19,16 @@ export const headerMenus: Menu[] = [
   },
   {
     id: 2,
+    label: m.search(),
+    href: '/search',
+  },
+  {
+    id: 3,
     label: m.discussions(),
     href: '/discussions',
   },
   {
-    id: 3,
+    id: 4,
     label: m.adopt(),
     href: '/adopt',
   },
@@ -44,7 +50,7 @@ export default function Header() {
           </Link>
         </div>
 
-        <div className="flex items-center">
+        <div className="gap-2 flex items-center">
           <HeaderMobile />
 
           <div className="hidden md:flex gap-4 items-center">

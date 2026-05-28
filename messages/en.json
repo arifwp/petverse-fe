@@ -52,5 +52,19 @@
   "delete_account_desc": "Permanently remove your account and all data",
   "about": "About Apps",
   "delete_account_confirm_desc": "We'll permanently delete your profile, posts, comments, and saved listings. Your pets' info will be removed too",
-  "you_sure": "You sure?"
+  "you_sure": "You sure?",
+  "followed_community": "Communities that are followed",
+  "post_like": "Like",
+  "post_comment": "Comment",
+  "post_share": "Share",
+  "post_bookmark": "Bookmark",
+  "post_verified_account": "Verified account",
+  "post_more_options": "More options",
+  "post_pet_count": "{count} pets",
+  "post_posted_in": "Posted in",
+  "post_media_alt": "Photo {index} of {count} shared by {author}",
+  "role_veterinarian": "Veterinarian",
+  "role_verified_rescue": "Verified rescue",
+  "role_official": "Official",
+  "feed_load_error": "Failed to load feed. Please try again."
 }

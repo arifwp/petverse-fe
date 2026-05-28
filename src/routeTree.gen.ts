@@ -13,6 +13,7 @@ import { Route as MainRouteRouteImport } from './routes/_main/route'
 import { Route as MainIndexRouteImport } from './routes/_main/index'
 import { Route as PublicTncRouteImport } from './routes/_public/tnc'
 import { Route as PublicPrivacyPolicyRouteImport } from './routes/_public/privacy-policy'
+import { Route as MainSearchRouteImport } from './routes/_main/search'
 import { Route as MainDiscussionsRouteImport } from './routes/_main/discussions'
 import { Route as MainAdoptRouteImport } from './routes/_main/adopt'
 import { Route as MainSettingsIndexRouteImport } from './routes/_main/settings/index'
@@ -36,6 +37,11 @@ const PublicPrivacyPolicyRoute = PublicPrivacyPolicyRouteImport.update({
   path: '/privacy-policy',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MainSearchRoute = MainSearchRouteImport.update({
+  id: '/search',
+  path: '/search',
+  getParentRoute: () => MainRouteRoute,
+} as any)
 const MainDiscussionsRoute = MainDiscussionsRouteImport.update({
   id: '/discussions',
   path: '/discussions',
@@ -56,6 +62,7 @@ export interface FileRoutesByFullPath {
   '/': typeof MainIndexRoute
   '/adopt': typeof MainAdoptRoute
   '/discussions': typeof MainDiscussionsRoute
+  '/search': typeof MainSearchRoute
   '/privacy-policy': typeof PublicPrivacyPolicyRoute
   '/tnc': typeof PublicTncRoute
   '/settings/': typeof MainSettingsIndexRoute
@@ -63,6 +70,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/adopt': typeof MainAdoptRoute
   '/discussions': typeof MainDiscussionsRoute
+  '/search': typeof MainSearchRoute
   '/privacy-policy': typeof PublicPrivacyPolicyRoute
   '/tnc': typeof PublicTncRoute
   '/': typeof MainIndexRoute
@@ -73,6 +81,7 @@ export interface FileRoutesById {
   '/_main': typeof MainRouteRouteWithChildren
   '/_main/adopt': typeof MainAdoptRoute
   '/_main/discussions': typeof MainDiscussionsRoute
+  '/_main/search': typeof MainSearchRoute
   '/_public/privacy-policy': typeof PublicPrivacyPolicyRoute
   '/_public/tnc': typeof PublicTncRoute
   '/_main/': typeof MainIndexRoute
@@ -84,16 +93,25 @@ export interface FileRouteTypes {
     | '/'
     | '/adopt'
     | '/discussions'
+    | '/search'
     | '/privacy-policy'
     | '/tnc'
     | '/settings/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/adopt' | '/discussions' | '/privacy-policy' | '/tnc' | '/' | '/settings'
+  to:
+    | '/adopt'
+    | '/discussions'
+    | '/search'
+    | '/privacy-policy'
+    | '/tnc'
+    | '/'
+    | '/settings'
   id:
     | '__root__'
     | '/_main'
     | '/_main/adopt'
     | '/_main/discussions'
+    | '/_main/search'
     | '/_public/privacy-policy'
     | '/_public/tnc'
     | '/_main/'
@@ -136,6 +154,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PublicPrivacyPolicyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_main/search': {
+      id: '/_main/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof MainSearchRouteImport
+      parentRoute: typeof MainRouteRoute
+    }
     '/_main/discussions': {
       id: '/_main/discussions'
       path: '/discussions'
@@ -163,6 +188,7 @@ declare module '@tanstack/react-router' {
 interface MainRouteRouteChildren {
   MainAdoptRoute: typeof MainAdoptRoute
   MainDiscussionsRoute: typeof MainDiscussionsRoute
+  MainSearchRoute: typeof MainSearchRoute
   MainIndexRoute: typeof MainIndexRoute
   MainSettingsIndexRoute: typeof MainSettingsIndexRoute
 }
@@ -170,6 +196,7 @@ interface MainRouteRouteChildren {
 const MainRouteRouteChildren: MainRouteRouteChildren = {
   MainAdoptRoute: MainAdoptRoute,
   MainDiscussionsRoute: MainDiscussionsRoute,
+  MainSearchRoute: MainSearchRoute,
   MainIndexRoute: MainIndexRoute,
   MainSettingsIndexRoute: MainSettingsIndexRoute,
 }
