@@ -1,8 +1,4 @@
-import type {
-  PostAuthorRole,
-  PostMedia,
-  PostSeed,
-} from '#/routes/_main/-components/-cards/post.types'
+import type { PostAuthorRole, PostMedia, PostSeed } from '#/types/post.types'
 
 /**
  * Deterministic dummy home-feed dataset (30 posts). Values are derived from
@@ -67,8 +63,6 @@ function buildMedia(postId: string, count: number): Array<PostMedia> {
   return Array.from({ length: count }, (_, k) => ({
     id: `${postId}-m${k}`,
     url: `https://picsum.photos/seed/${postId}-${k}/800/600`,
-    width: 800,
-    height: 600,
   }))
 }
 

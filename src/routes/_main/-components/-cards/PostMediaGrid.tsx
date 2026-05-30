@@ -2,7 +2,7 @@ import { memo } from 'react'
 
 import { cn } from '#/lib/utils'
 import { m } from '#/paraglide/messages'
-import type { PostMedia } from './post.types'
+import type { PostMedia } from '../../../../types/post.types'
 
 interface PostMediaGridProps {
   media: Array<PostMedia>
@@ -26,10 +26,9 @@ export const PostMediaGrid = memo(function PostMediaGrid({
 
   const count = Math.min(media.length, 4)
   const placement = ITEM_CLASS[count] ?? ITEM_CLASS[4]
-  const isGallery = count > 1
 
   return (
-    <div className="relative overflow-hidden rounded-xl border border-border">
+    <div className="rounded-xl overflow-hidden">
       <div className="grid grid-cols-2 gap-0.5">
         {media.slice(0, count).map((item, index) => (
           <div
@@ -47,8 +46,6 @@ export const PostMediaGrid = memo(function PostMediaGrid({
                     })
                   : ''
               }
-              width={item.width}
-              height={item.height}
               loading="lazy"
               decoding="async"
               className="size-full object-cover"
@@ -56,25 +53,6 @@ export const PostMediaGrid = memo(function PostMediaGrid({
           </div>
         ))}
       </div>
-
-      {isGallery && (
-        <>
-          <span className="absolute top-2 right-2 rounded-full bg-black/60 px-2 py-0.5 text-xs font-medium text-white tabular-nums">
-            1 / {media.length}
-          </span>
-          <div className="pointer-events-none absolute inset-x-0 bottom-2 flex justify-center gap-1">
-            {media.slice(0, 4).map((item, index) => (
-              <span
-                key={item.id}
-                className={cn(
-                  'size-1.5 rounded-full',
-                  index === 0 ? 'bg-white' : 'bg-white/50',
-                )}
-              />
-            ))}
-          </div>
-        </>
-      )}
     </div>
   )
 })

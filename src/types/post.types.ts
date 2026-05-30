@@ -28,8 +28,6 @@ export interface PostCommunity {
 export interface PostMedia {
   id: string
   url: string
-  width: number
-  height: number
 }
 
 export interface PostStats {

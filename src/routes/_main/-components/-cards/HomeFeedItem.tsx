@@ -3,7 +3,7 @@ import { memo } from 'react'
 import { PostActions } from './PostActions'
 import { PostHeader } from './PostHeader'
 import { PostMediaGrid } from './PostMediaGrid'
-import type { Post } from './post.types'
+import type { Post } from '../../../../types/post.types'
 
 interface HomeFeedItemProps {
   post: Post

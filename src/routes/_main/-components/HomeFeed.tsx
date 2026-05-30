@@ -1,13 +1,12 @@
-import { useCallback, useMemo } from 'react'
-import { useInfiniteQuery } from '@tanstack/react-query'
-
 import { m } from '#/paraglide/messages'
-import { FeedStructuredData } from '#/routes/_main/-components/-cards/FeedStructuredData'
+import { HomeFeedSeo } from '#/routes/_main/-components/-cards/HomeFeedSeo'
 import { homeFeedInfiniteQueryOptions } from '#/routes/_main/-queries/home-feed.queries'
-import { FeedList } from './FeedList'
-import { FeedSkeleton } from './FeedSkeleton'
+import { useInfiniteQuery } from '@tanstack/react-query'
+import { useCallback, useMemo } from 'react'
+import { HomeFeedSkeleton } from './-skeletons/HomeFeedSkeleton'
+import { HomeAddPost } from './HomeAddPost'
+import { HomeFeedList } from './HomeFeedList'
 
-/** Re-exported so the static dummy dataset is reachable from the feed module. */
 export { HOME_FEED_POSTS } from '#/data/home-feed-data'
 
 export const HomeFeed = () => {
@@ -24,7 +23,7 @@ export const HomeFeed = () => {
   }, [hasNextPage, isFetchingNextPage, fetchNextPage])
 
   if (status === 'pending') {
-    return <FeedSkeleton />
+    return <HomeFeedSkeleton />
   }
 
   if (status === 'error') {
@@ -36,15 +35,17 @@ export const HomeFeed = () => {
   }
 
   return (
-    <>
-      <FeedStructuredData posts={posts} />
+    <div className="w-full gap-4 flex flex-col">
+      <HomeFeedSeo posts={posts} />
 
-      <FeedList
+      <HomeAddPost />
+
+      <HomeFeedList
         posts={posts}
         hasNextPage={hasNextPage}
         isFetchingNextPage={isFetchingNextPage}
         onLoadMore={handleLoadMore}
       />
-    </>
+    </div>
   )
 }

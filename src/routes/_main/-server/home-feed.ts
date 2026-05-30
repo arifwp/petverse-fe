@@ -1,7 +1,7 @@
 import { createServerFn } from '@tanstack/react-start'
 
 import { HOME_FEED_POSTS } from '#/data/home-feed-data'
-import type { Post } from '#/routes/_main/-components/-cards/post.types'
+import type { Post } from '#/types/post.types'
 
 export interface HomeFeedQuery {
   page: number

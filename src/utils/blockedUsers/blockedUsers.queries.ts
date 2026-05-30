@@ -1,9 +1,9 @@
+import { QueryKeys } from '#/hooks/queries/queryKeys'
 import type { BlockedUsersQuery } from '#/utils/blockedUsers/blockedUsers'
 import {
   getBlockedUsers,
   unblockUser,
 } from '#/utils/blockedUsers/blockedUsers.functions'
-import { blockedUsersKeys } from '#/utils/blockedUsers/blockedUsers.keys'
 import {
   queryOptions,
   useMutation,
@@ -16,7 +16,7 @@ export const blockedUsersListOptions = (
   options?: { enabled?: boolean },
 ) =>
   queryOptions({
-    queryKey: blockedUsersKeys.list(filters),
+    queryKey: [QueryKeys.user.blocked, QueryKeys.list, filters],
     queryFn: () => getBlockedUsers({ data: filters }),
     enabled: options?.enabled,
     placeholderData: (prev) => prev,
@@ -33,7 +33,7 @@ export const useUnblockUserMutation = () => {
   return useMutation({
     mutationFn: (id: string) => unblockUser({ data: id }),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: blockedUsersKeys.all })
+      queryClient.invalidateQueries({ queryKey: [QueryKeys.user.blocked] })
     },
   })
 }

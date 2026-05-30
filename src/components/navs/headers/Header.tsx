@@ -3,7 +3,6 @@ import { m } from '#/paraglide/messages.js'
 import { Link } from '@tanstack/react-router'
 import { HeaderMobile } from './HeaderMobile.tsx'
 import { HeaderProfileMenu } from './HeaderProfileMenu.tsx'
-import { Search } from 'lucide-react'
 
 export interface Menu {
   id: number
@@ -36,7 +35,7 @@ export const headerMenus: Menu[] = [
 
 export default function Header() {
   return (
-    <header className="sticky top-0 z-50 h-20 px-4 lg:px-0 bg-white dark:bg-neutral-900 border-b border-b-neutral-200 dark:border-b-neutral-800">
+    <header className="sticky top-0 z-50 h-20 px-4 bg-white dark:bg-neutral-900 border-b border-b-neutral-200 dark:border-b-neutral-800">
       <nav className="h-full gap-4 flex items-center justify-between">
         <div className="gap-4 flex items-center">
           <Link to="/" className="text-lg font-bold flex items-center gap-2">

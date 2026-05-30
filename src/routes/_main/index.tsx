@@ -1,8 +1,11 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { HomeFeed } from './-components/-navs/HomeFeed'
-import { HomeNavMenu } from './-components/-navs/HomeNavMenu'
-import { HomeOthers } from './-components/-navs/HomeOthers'
+import { HomeFeed } from './-components/HomeFeed'
+import { HomeCommunities } from './-components/HomeCommunities'
+import { HomeOthers } from './-components/HomeOthers'
+import { communitiesQueryOptions } from './-queries/home-community.queries'
 import { homeFeedInfiniteQueryOptions } from './-queries/home-feed.queries'
+import { loggedInUserQueryOptions } from '#/hooks/queries/user.queries'
+import { trendingTopicQueryOptions } from './-queries/home-others.queries'
 
 const SEO_TITLE = 'PetVerse — Pet Community Feed'
 const SEO_DESCRIPTION =
@@ -10,8 +13,16 @@ const SEO_DESCRIPTION =
 
 export const Route = createFileRoute('/_main/')({
   component: App,
+  // Prefetch (not ensure) so the queries warm the cache during SSR without a
+  // failing fetch taking down the whole route — each section owns its own
+  // loading/error state via its hook. See HomeFeed's skeleton/error branches.
   loader: ({ context }) =>
-    context.queryClient.ensureInfiniteQueryData(homeFeedInfiniteQueryOptions()),
+    Promise.all([
+      context.queryClient.prefetchInfiniteQuery(homeFeedInfiniteQueryOptions()),
+      context.queryClient.prefetchQuery(communitiesQueryOptions()),
+      context.queryClient.prefetchQuery(trendingTopicQueryOptions()),
+      context.queryClient.prefetchQuery(loggedInUserQueryOptions()),
+    ]),
   head: () => ({
     meta: [
       { title: SEO_TITLE },
@@ -28,12 +39,12 @@ export const Route = createFileRoute('/_main/')({
 
 function App() {
   return (
-    <div className="w-full h-full py-4 px-4 lg:px-0 flex items-start">
+    <div className="w-full h-full p-4 gap-4 flex items-start">
       <div className="hidden md:flex flex-1">
-        <HomeNavMenu />
+        <HomeCommunities />
       </div>
 
-      <div className="md:flex-2 flex flex-col items-center justify-center">
+      <div className="md:flex-3 flex flex-col items-center justify-center">
         <HomeFeed />
       </div>
 

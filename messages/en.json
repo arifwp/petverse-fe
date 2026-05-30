@@ -66,5 +66,11 @@
   "role_veterinarian": "Veterinarian",
   "role_verified_rescue": "Verified rescue",
   "role_official": "Official",
-  "feed_load_error": "Failed to load feed. Please try again."
+  "feed_load_error": "Failed to load feed. Please try again.",
+  "community": "Community",
+  "community_load_error": "Failed to load communities. Please try again.",
+  "community_empty": "You haven't joined any communities yet.",
+  "community_members": "{count} members",
+  "community_explore": "Explore Community",
+  "trending_topics": "Trending Topics"
 }

@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 import { Loader2 } from 'lucide-react'
 
 import { HomeFeedItem } from '#/routes/_main/-components/-cards/HomeFeedItem'
-import type { Post } from '#/routes/_main/-components/-cards/post.types'
+import type { Post } from '#/types/post.types'
 
 interface FeedListProps {
   posts: Array<Post>
@@ -16,7 +16,7 @@ interface FeedListProps {
  * guaranteed visible), and an IntersectionObserver sentinel near the bottom
  * drives infinite scroll. Pagination keeps the DOM bounded in normal use.
  */
-export function FeedList({
+export function HomeFeedList({
   posts,
   hasNextPage,
   isFetchingNextPage,

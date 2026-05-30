@@ -17,6 +17,8 @@ import { Route as MainSearchRouteImport } from './routes/_main/search'
 import { Route as MainDiscussionsRouteImport } from './routes/_main/discussions'
 import { Route as MainAdoptRouteImport } from './routes/_main/adopt'
 import { Route as MainSettingsIndexRouteImport } from './routes/_main/settings/index'
+import { Route as MainCommunityIndexRouteImport } from './routes/_main/community/index'
+import { Route as MainCommunityCommunityIdRouteImport } from './routes/_main/community/$communityId'
 
 const MainRouteRoute = MainRouteRouteImport.update({
   id: '/_main',
@@ -57,6 +59,17 @@ const MainSettingsIndexRoute = MainSettingsIndexRouteImport.update({
   path: '/settings/',
   getParentRoute: () => MainRouteRoute,
 } as any)
+const MainCommunityIndexRoute = MainCommunityIndexRouteImport.update({
+  id: '/community/',
+  path: '/community/',
+  getParentRoute: () => MainRouteRoute,
+} as any)
+const MainCommunityCommunityIdRoute =
+  MainCommunityCommunityIdRouteImport.update({
+    id: '/community/$communityId',
+    path: '/community/$communityId',
+    getParentRoute: () => MainRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof MainIndexRoute
@@ -65,6 +78,8 @@ export interface FileRoutesByFullPath {
   '/search': typeof MainSearchRoute
   '/privacy-policy': typeof PublicPrivacyPolicyRoute
   '/tnc': typeof PublicTncRoute
+  '/community/$communityId': typeof MainCommunityCommunityIdRoute
+  '/community/': typeof MainCommunityIndexRoute
   '/settings/': typeof MainSettingsIndexRoute
 }
 export interface FileRoutesByTo {
@@ -74,6 +89,8 @@ export interface FileRoutesByTo {
   '/privacy-policy': typeof PublicPrivacyPolicyRoute
   '/tnc': typeof PublicTncRoute
   '/': typeof MainIndexRoute
+  '/community/$communityId': typeof MainCommunityCommunityIdRoute
+  '/community': typeof MainCommunityIndexRoute
   '/settings': typeof MainSettingsIndexRoute
 }
 export interface FileRoutesById {
@@ -85,6 +102,8 @@ export interface FileRoutesById {
   '/_public/privacy-policy': typeof PublicPrivacyPolicyRoute
   '/_public/tnc': typeof PublicTncRoute
   '/_main/': typeof MainIndexRoute
+  '/_main/community/$communityId': typeof MainCommunityCommunityIdRoute
+  '/_main/community/': typeof MainCommunityIndexRoute
   '/_main/settings/': typeof MainSettingsIndexRoute
 }
 export interface FileRouteTypes {
@@ -96,6 +115,8 @@ export interface FileRouteTypes {
     | '/search'
     | '/privacy-policy'
     | '/tnc'
+    | '/community/$communityId'
+    | '/community/'
     | '/settings/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -105,6 +126,8 @@ export interface FileRouteTypes {
     | '/privacy-policy'
     | '/tnc'
     | '/'
+    | '/community/$communityId'
+    | '/community'
     | '/settings'
   id:
     | '__root__'
@@ -115,6 +138,8 @@ export interface FileRouteTypes {
     | '/_public/privacy-policy'
     | '/_public/tnc'
     | '/_main/'
+    | '/_main/community/$communityId'
+    | '/_main/community/'
     | '/_main/settings/'
   fileRoutesById: FileRoutesById
 }
@@ -182,6 +207,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MainSettingsIndexRouteImport
       parentRoute: typeof MainRouteRoute
     }
+    '/_main/community/': {
+      id: '/_main/community/'
+      path: '/community'
+      fullPath: '/community/'
+      preLoaderRoute: typeof MainCommunityIndexRouteImport
+      parentRoute: typeof MainRouteRoute
+    }
+    '/_main/community/$communityId': {
+      id: '/_main/community/$communityId'
+      path: '/community/$communityId'
+      fullPath: '/community/$communityId'
+      preLoaderRoute: typeof MainCommunityCommunityIdRouteImport
+      parentRoute: typeof MainRouteRoute
+    }
   }
 }
 
@@ -190,6 +229,8 @@ interface MainRouteRouteChildren {
   MainDiscussionsRoute: typeof MainDiscussionsRoute
   MainSearchRoute: typeof MainSearchRoute
   MainIndexRoute: typeof MainIndexRoute
+  MainCommunityCommunityIdRoute: typeof MainCommunityCommunityIdRoute
+  MainCommunityIndexRoute: typeof MainCommunityIndexRoute
   MainSettingsIndexRoute: typeof MainSettingsIndexRoute
 }
 
@@ -198,6 +239,8 @@ const MainRouteRouteChildren: MainRouteRouteChildren = {
   MainDiscussionsRoute: MainDiscussionsRoute,
   MainSearchRoute: MainSearchRoute,
   MainIndexRoute: MainIndexRoute,
+  MainCommunityCommunityIdRoute: MainCommunityCommunityIdRoute,
+  MainCommunityIndexRoute: MainCommunityIndexRoute,
   MainSettingsIndexRoute: MainSettingsIndexRoute,
 }
 

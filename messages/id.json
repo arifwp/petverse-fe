@@ -66,5 +66,11 @@
   "role_veterinarian": "Dokter Hewan",
   "role_verified_rescue": "Penyelamat Terverifikasi",
   "role_official": "Resmi",
-  "feed_load_error": "Gagal memuat feed. Silakan coba lagi."
+  "feed_load_error": "Gagal memuat feed. Silakan coba lagi.",
+  "community": "Komunitas",
+  "community_load_error": "Gagal memuat komunitas. Silakan coba lagi.",
+  "community_empty": "Kamu belum bergabung di komunitas mana pun.",
+  "community_members": "{count} anggota",
+  "community_explore": "Jelajahi Komunitas",
+  "trending_topics": "Topik Tren"
 }

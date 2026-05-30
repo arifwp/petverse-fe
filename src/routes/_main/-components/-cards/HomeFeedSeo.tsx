@@ -1,7 +1,7 @@
 import { memo } from 'react'
 
 import { HOME_FEED_PAGE_SIZE } from '#/routes/_main/-queries/home-feed.queries'
-import type { Post } from './post.types'
+import type { Post } from '../../../../types/post.types'
 
 /**
  * Server-rendered SEO surface, decoupled from the (client-only, virtualized)
@@ -49,13 +49,13 @@ function buildPostNode(post: Post): Record<string, unknown> {
   return node
 }
 
-interface FeedStructuredDataProps {
+interface HomeFeedSeoProps {
   posts: Array<Post>
 }
 
-export const FeedStructuredData = memo(function FeedStructuredData({
+export const HomeFeedSeo = memo(function HomeFeedSeo({
   posts,
-}: FeedStructuredDataProps) {
+}: HomeFeedSeoProps) {
   if (posts.length === 0) return null
 
   const data = {

@@ -3,9 +3,9 @@ import { Bookmark, Heart, MessageCircle, Share } from 'lucide-react'
 
 import { Button } from '#/components/ui/button'
 import { m } from '#/paraglide/messages'
-import type { PostStats } from './post.types'
+import type { PostStats } from '../../../../types/post.types'
 
-interface PostActionsProps {
+interface Props {
   stats: PostStats
 }
 
@@ -16,9 +16,7 @@ function formatCount(value: number): string {
   return `${k % 1 === 0 ? k : k.toFixed(1)}k`
 }
 
-export const PostActions = memo(function PostActions({
-  stats,
-}: PostActionsProps) {
+export const PostActions = memo(function PostActions({ stats }: Props) {
   return (
     <div className="flex items-center gap-1 text-muted-foreground">
       <Button

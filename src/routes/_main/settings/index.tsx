@@ -11,7 +11,7 @@ export const Route = createFileRoute('/_main/settings/')({
 
 function RouteComponent() {
   return (
-    <div className="w-full max-w-3xl mx-auto py-4 px-4 lg:px-0 flex flex-col">
+    <div className="w-full max-w-3xl mx-auto p-4 flex flex-col">
       <div className="w-full gap-8 flex flex-col items-center justify-center">
         <SettingsProfile />
 

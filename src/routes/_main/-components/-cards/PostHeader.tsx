@@ -1,17 +1,18 @@
 import { memo } from 'react'
 import { BadgeCheck, MoreHorizontal } from 'lucide-react'
 
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from '#/components/ui/avatar'
+import { Avatar, AvatarFallback, AvatarImage } from '#/components/ui/avatar'
 import { Badge } from '#/components/ui/badge'
 import { Button } from '#/components/ui/button'
 import { cn } from '#/lib/utils'
 import { m } from '#/paraglide/messages'
 import { RelativeTime } from './RelativeTime'
-import type { PostAuthor, PostAuthorRole, PostCommunity } from './post.types'
+import type {
+  PostAuthor,
+  PostAuthorRole,
+  PostCommunity,
+} from '../../../../types/post.types'
+import { initials } from '#/lib/string'
 
 interface PostHeaderProps {
   author: PostAuthor
@@ -25,18 +26,12 @@ const ROLE_LABEL: Record<Exclude<PostAuthorRole, 'member'>, () => string> = {
   platform: m.role_official,
 }
 
-function initials(name: string): string {
-  const parts = name.replace(/^Dr\.\s*/i, '').split(' ')
-  return ((parts[0]?.[0] ?? '') + (parts[1]?.[0] ?? '')).toUpperCase()
-}
-
 export const PostHeader = memo(function PostHeader({
   author,
   community,
   createdAt,
 }: PostHeaderProps) {
-  const roleLabel =
-    author.role !== 'member' ? ROLE_LABEL[author.role]() : null
+  const roleLabel = author.role !== 'member' ? ROLE_LABEL[author.role]() : null
 
   return (
     <header className="flex items-start gap-3">

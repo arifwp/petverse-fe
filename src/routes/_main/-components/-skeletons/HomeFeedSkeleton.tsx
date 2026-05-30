@@ -1,5 +1,5 @@
 /** Server-rendered placeholder shown until the client virtualizes the feed. */
-export function FeedSkeleton() {
+export function HomeFeedSkeleton() {
   return (
     <div className="flex w-full max-w-xl flex-col gap-4" aria-hidden>
       {Array.from({ length: 4 }).map((_, index) => (
