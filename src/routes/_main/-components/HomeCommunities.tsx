@@ -9,7 +9,7 @@ export const HomeCommunities = () => {
   const { data: communities, status } = useCommunitiesQuery()
 
   return (
-    <div className="w-full gap-4 flex flex-col">
+    <div className="w-full flex flex-col">
       <h5 className="text-xs font-medium tracking-wider uppercase text-secondary-foreground">
         {m.community()}
       </h5>
